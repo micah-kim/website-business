@@ -1,23 +1,40 @@
 /* =========================================================
-   Foundry — design system
-   A warm, editorial style built for makers and small sellers.
+   Foundry - design system
+   Pastel Y2K scrapbook: candy paper, washi tape, stickers and
+   doodles, held together by one deep berry ink.
+
+   Color rule that keeps this readable:
+   pastels are SURFACE ONLY (paper, tape, stickers, card fills).
+   Text and interactive color is always --color-ink,
+   --color-ink-soft, --color-accent, or --color-accent-ink.
+   Every pairing below is verified at WCAG AA or better.
    ========================================================= */
 
 :root {
-  /* Color: warm neutral base + one confident accent */
-  --color-bg: #faf6f0;
-  --color-bg-alt: #f1e9de;
-  --color-ink: #201b16;
-  --color-ink-soft: #5c5348;
-  --color-line: #e3d9c9;
-  --color-accent: #c2571c;
-  --color-accent-text: #ac4d19;
-  --color-accent-ink: #fff7ef;
+  /* Ink + paper (text-safe) */
+  --color-bg: #fdf8f2;
+  --color-bg-alt: #fbf0f4;
+  --color-ink: #211b26;
+  --color-ink-soft: #574c5e;
+  --color-ink-onDark: #d9cedb;
+  --color-line: #e3d7e4;
+  --color-accent: #6d1b4e;
+  --color-accent-hover: #85235f;
+  --color-accent-text: #6d1b4e;
+  --color-accent-ink: #fff6fa;
   --color-card: #ffffff;
+
+  /* Pastels - decoration and surfaces only, never text color */
+  --paper-pink: #fad6e5;
+  --paper-lilac: #e3d6f7;
+  --paper-mint: #c9eedd;
+  --paper-butter: #fbeebc;
+  --paper-lilac-wash: #f4eefa;
 
   /* Type */
   --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-hand: "Caveat", "Bradley Hand", "Segoe Script", cursive;
 
   /* Scale */
   --space-1: 0.5rem;
@@ -33,7 +50,11 @@
 
   --container: 1120px;
 
-  --shadow-soft: 0 20px 40px -24px rgba(32, 27, 22, 0.25);
+  --shadow-soft: 0 20px 40px -24px rgba(33, 27, 38, 0.28);
+  --shadow-sticker: 2px 3px 0 rgba(33, 27, 38, 0.16);
+
+  /* Torn / deckle paper edge, reused by every divider */
+  --deckle-mask: radial-gradient(circle at 11px 24px, transparent 11px, #000 11.5px);
 
   --header-height: 84px;
 }
@@ -48,7 +69,10 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-bg);
+  /* faint scrapbook-paper speckle over the cream base */
+  background-color: var(--color-bg);
+  background-image: radial-gradient(rgba(109, 27, 78, 0.055) 1px, transparent 1px);
+  background-size: 22px 22px;
   color: var(--color-ink);
   font-family: var(--font-body);
   font-size: 17px;
@@ -74,6 +98,13 @@ a {
 
 .btn:focus-visible {
   outline-offset: 3px;
+}
+
+/* The berry ring is invisible on the dark surfaces, so flip it
+   to the light ink there (15.9:1 instead of 1.5:1). */
+.cta-band :focus-visible,
+.price-card.featured :focus-visible {
+  outline-color: var(--color-accent-ink);
 }
 
 main:focus-visible {
@@ -126,15 +157,31 @@ p {
   color: var(--color-ink-soft);
 }
 
+/* Eyebrows read as little taped-on paper labels.
+   Dark ink on a pastel chip - 12:1 or better on every pastel. */
 .eyebrow {
   display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-size: 0.74rem;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-accent-text);
-  margin-bottom: var(--space-2);
+  color: var(--color-ink);
+  background: var(--paper-butter);
+  border: 1.5px solid var(--color-ink);
+  border-radius: 4px 10px 5px 9px;
+  padding: 0.25rem 0.7rem;
+  transform: rotate(-1.5deg);
+  box-shadow: var(--shadow-sticker);
+  margin-bottom: var(--space-3);
 }
+
+#services .eyebrow { background: var(--paper-mint); transform: rotate(1.5deg); }
+#work .eyebrow { background: var(--paper-pink); transform: rotate(-2deg); }
+#about .eyebrow { background: var(--paper-lilac); transform: rotate(1.2deg); }
+#process .eyebrow { background: var(--paper-lilac); }
+#compare .eyebrow { background: var(--paper-mint); }
+#pricing .eyebrow { background: var(--paper-pink); }
+#faq .eyebrow { background: var(--paper-lilac); }
 
 .section {
   padding: var(--space-6) 0;
@@ -175,18 +222,20 @@ p {
 
 .btn-primary:hover {
   background: var(--color-accent);
-  transform: translateY(-1px);
+  transform: translateY(-1px) rotate(-1deg);
   box-shadow: var(--shadow-soft);
 }
 
 .btn-ghost {
-  background: transparent;
+  background: var(--color-card);
   color: var(--color-ink);
-  border-color: var(--color-line);
+  border-color: var(--color-ink);
+  box-shadow: var(--shadow-sticker);
 }
 
 .btn-ghost:hover {
-  border-color: var(--color-ink);
+  background: var(--paper-butter);
+  transform: translateY(-1px) rotate(1deg);
 }
 
 /* ---------- Header / nav ---------- */
@@ -196,7 +245,7 @@ p {
   top: 0;
   z-index: 50;
   min-height: var(--header-height);
-  background: rgba(250, 246, 240, 0.85);
+  background: rgba(253, 248, 242, 0.9);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-line);
 }
@@ -324,6 +373,7 @@ main section[id],
 
 .hero h1 {
   font-size: clamp(2.4rem, 5vw, 3.8rem);
+  margin-bottom: var(--space-3);
 }
 
 .hero-lede {
@@ -333,8 +383,10 @@ main section[id],
 
 .hero-actions {
   display: flex;
+  align-items: center;
   gap: var(--space-2);
-  margin: var(--space-4) 0 var(--space-4);
+  /* extra bottom room for the hand-drawn "start here!" note */
+  margin: var(--space-4) 0 calc(var(--space-4) + 2.4rem);
   flex-wrap: wrap;
 }
 
@@ -420,7 +472,7 @@ main section[id],
 .mock-hero {
   height: 90px;
   border-radius: var(--radius-sm);
-  background: linear-gradient(120deg, var(--color-accent), #e08a4f);
+  background: linear-gradient(120deg, var(--paper-pink), var(--paper-lilac) 55%, var(--paper-mint));
   margin-bottom: var(--space-1);
 }
 
@@ -451,7 +503,7 @@ main section[id],
 }
 
 .mock-tile {
-  background: linear-gradient(150deg, var(--color-bg-alt), #e6d5c2);
+  background: linear-gradient(150deg, var(--paper-lilac-wash), var(--paper-pink));
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-line);
 }
@@ -472,7 +524,8 @@ main section[id],
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: var(--paper-mint);
+  border: 2px solid var(--color-ink);
 }
 
 .mock-launch-title {
@@ -527,11 +580,17 @@ main section[id],
 
 .trust-tags span {
   font-size: 0.9rem;
-  color: var(--color-ink-soft);
-  padding: 0.35rem 0.8rem;
-  border: 1px solid var(--color-line);
+  color: var(--color-ink);
+  padding: 0.35rem 0.85rem;
+  border: 1.5px solid var(--color-ink);
   border-radius: 100px;
+  box-shadow: var(--shadow-sticker);
 }
+
+.trust-tags span:nth-child(1) { background: var(--paper-pink); transform: rotate(-1.5deg); }
+.trust-tags span:nth-child(2) { background: var(--paper-lilac); transform: rotate(1deg); }
+.trust-tags span:nth-child(3) { background: var(--paper-mint); transform: rotate(-1deg); }
+.trust-tags span:nth-child(4) { background: var(--paper-butter); transform: rotate(1.5deg); }
 
 /* ---------- Services ---------- */
 
@@ -542,17 +601,30 @@ main section[id],
 }
 
 .service-card {
+  position: relative;
   background: var(--color-card);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-md);
+  border: 2px solid var(--color-ink);
+  border-radius: 18px 6px 18px 6px;
   padding: var(--space-4);
+  box-shadow: 4px 5px 0 rgba(33, 27, 38, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-grid .service-card:nth-child(1) { transform: rotate(-1deg); }
+.card-grid .service-card:nth-child(2) { transform: rotate(0.6deg); }
+.card-grid .service-card:nth-child(3) { transform: rotate(-0.5deg); }
+
+.card-grid .service-card:hover {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow: 6px 8px 0 rgba(33, 27, 38, 0.16);
 }
 
 .service-card .icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: var(--color-bg-alt);
+  width: 46px;
+  height: 46px;
+  border-radius: 50% 46% 52% 48% / 48% 52% 46% 54%;
+  border: 2px solid var(--color-ink);
+  background: var(--paper-lilac);
   display: grid;
   place-items: center;
   margin-bottom: var(--space-3);
@@ -597,17 +669,42 @@ main section[id],
   align-items: start;
 }
 
-.about-avatar {
+/* Polaroid pinned into the scrapbook */
+.about-photo {
+  position: relative;
   width: 200px;
-  height: 200px;
-  border-radius: var(--radius-lg);
-  background: var(--color-accent);
-  color: var(--color-accent-ink);
+  background: var(--color-card);
+  border: 2px solid var(--color-ink);
+  padding: 12px 12px 4px;
+  border-radius: 4px;
+  box-shadow: 5px 6px 0 rgba(33, 27, 38, 0.14);
+  transform: rotate(-3deg);
+  transition: transform 0.2s ease;
+}
+
+.about-photo:hover {
+  transform: rotate(1deg);
+}
+
+.about-avatar {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: linear-gradient(150deg, var(--paper-pink), var(--paper-lilac) 60%, var(--paper-mint));
+  color: var(--color-ink);
   display: grid;
   place-items: center;
   font-family: var(--font-display);
   font-size: 4.5rem;
   font-weight: 600;
+}
+
+.about-caption {
+  font-family: var(--font-hand);
+  font-size: 1.25rem;
+  color: var(--color-ink);
+  text-align: center;
+  margin: 0.35rem 0 0.2rem;
 }
 
 .about-copy p {
@@ -753,11 +850,11 @@ main section[id],
 .price-card.featured p,
 .price-card.featured li,
 .price-card.featured .price span {
-  color: #d8d0c4;
+  color: var(--color-ink-onDark);
 }
 
 .price-card.featured li::before {
-  color: #e08a4f;
+  color: var(--paper-mint);
 }
 
 .price {
@@ -842,6 +939,7 @@ main section[id],
 /* ---------- Contact / CTA ---------- */
 
 .cta-band {
+  position: relative;
   background: var(--color-ink);
   color: var(--color-accent-ink);
   border-radius: var(--radius-lg);
@@ -854,23 +952,25 @@ main section[id],
 }
 
 .cta-band p {
-  color: #d8d0c4;
+  color: var(--color-ink-onDark);
   max-width: 480px;
   margin-left: auto;
   margin-right: auto;
 }
 
+/* the eyebrow is a <p>, but it sits on a pastel chip - keep it dark ink */
 .cta-band .eyebrow {
-  color: #e08a4f;
+  color: var(--color-ink);
 }
 
 .cta-band .btn-primary {
   background: var(--color-accent);
   color: var(--color-accent-ink);
+  border-color: var(--color-accent-ink);
 }
 
 .cta-band .btn-primary:hover {
-  background: #e08a4f;
+  background: var(--color-accent-hover);
 }
 
 .cta-fallback {
@@ -914,6 +1014,11 @@ main section[id],
   color: var(--color-ink);
   font-family: var(--font-body);
   font-size: 0.95rem;
+}
+
+.contact-form ::placeholder {
+  color: var(--color-ink-soft);
+  opacity: 1;
 }
 
 .contact-form button {
@@ -985,14 +1090,8 @@ main section[id],
   }
 
   .about-wrap {
-    grid-template-columns: 140px 1fr;
+    grid-template-columns: 150px 1fr;
     gap: var(--space-3);
-  }
-
-  .about-avatar {
-    width: 140px;
-    height: 140px;
-    font-size: 3rem;
   }
 }
 
@@ -1021,11 +1120,422 @@ main section[id],
     grid-template-columns: 1fr;
     justify-items: start;
   }
+}
+
+/* =========================================================
+   Scrapbook motifs
+   Everything below is pure CSS + inline SVG. Pastels are
+   surfaces only; all text on them is --color-ink (>=12:1).
+   ========================================================= */
+
+/* ---------- Washi tape ---------- */
+
+.taped,
+.photo-frame {
+  position: relative;
+}
+
+.tape {
+  position: absolute;
+  z-index: 3;
+  width: 96px;
+  height: 27px;
+  pointer-events: none;
+  opacity: 0.82;
+  /* torn, slightly ragged ends */
+  clip-path: polygon(
+    2% 0%, 98% 0%,
+    96% 25%, 100% 50%, 95% 75%, 99% 100%,
+    2% 100%,
+    5% 75%, 0% 50%, 4% 25%
+  );
+}
+
+/* faint tape-fibre striping so it does not read as a flat rectangle */
+.tape::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.22) 0 4px,
+    rgba(255, 255, 255, 0) 4px 11px
+  );
+}
+
+.tape-pink { background: var(--paper-pink); }
+.tape-lilac { background: var(--paper-lilac); }
+.tape-mint { background: var(--paper-mint); }
+.tape-butter { background: var(--paper-butter); }
+
+.tape-tl { top: -13px; left: -16px; transform: rotate(-8deg); }
+.tape-tr { top: -13px; right: -16px; transform: rotate(7deg); }
+.tape-br { bottom: -13px; right: -16px; transform: rotate(-6deg); }
+.tape-top { top: -14px; left: 50%; transform: translateX(-50%) rotate(-2.5deg); }
+
+/* ---------- Sticker badges ---------- */
+
+.sticker {
+  display: inline-block;
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.1;
+  white-space: nowrap;
+  color: var(--color-ink);
+  background: var(--paper-pink);
+  border: 2px solid var(--color-ink);
+  border-radius: 50% 46% 52% 48% / 48% 52% 46% 54%;
+  padding: 0.5rem 1.05rem;
+  transform: rotate(-6deg);
+  box-shadow: var(--shadow-sticker);
+  transition: transform 0.2s ease;
+}
+
+.sticker:hover {
+  transform: rotate(4deg) scale(1.06);
+}
+
+.sticker-pink { background: var(--paper-pink); }
+.sticker-lilac { background: var(--paper-lilac); }
+.sticker-mint { background: var(--paper-mint); }
+.sticker-butter { background: var(--paper-butter); }
+
+.sticker-hero-1 {
+  position: absolute;
+  z-index: 4;
+  top: -18px;
+  left: -14px;
+  transform: rotate(-12deg);
+}
+
+.sticker-hero-1:hover { transform: rotate(-4deg) scale(1.06); }
+
+.sticker-hero-2 {
+  position: absolute;
+  z-index: 4;
+  right: -18px;
+  bottom: -20px;
+  transform: rotate(8deg);
+}
+
+.sticker-hero-2:hover { transform: rotate(0deg) scale(1.06); }
+
+.sticker-card {
+  position: absolute;
+  z-index: 4;
+  top: -16px;
+  right: -12px;
+  font-size: 1.05rem;
+  transform: rotate(9deg);
+}
+
+.sticker-card:hover { transform: rotate(2deg) scale(1.06); }
+
+.sticker-about {
+  margin: 0 0 var(--space-2);
+  transform: rotate(-3deg);
+}
+
+.sticker-cta {
+  position: absolute;
+  top: -16px;
+  right: 8%;
+  transform: rotate(10deg);
+}
+
+.sticker-cta:hover { transform: rotate(2deg) scale(1.06); }
+
+/* ---------- Hand-drawn doodles ---------- */
+
+.squiggle-word {
+  position: relative;
+  display: inline-block;
+}
+
+.doodle-squiggle {
+  position: absolute;
+  left: 0;
+  bottom: -0.22em;
+  width: 100%;
+  height: 0.3em;
+  overflow: visible;
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cta-with-arrow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Sits below the primary CTA and curls back up at it, so it
+   never lands on top of the neighbouring button. */
+.doodle-note {
+  position: absolute;
+  top: calc(100% - 2px);
+  left: 38%;
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.doodle-arrow {
+  width: 48px;
+  height: 34px;
+  flex: none;
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: scaleY(-1);
+}
+
+.doodle-note-text {
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-accent-text);
+  white-space: nowrap;
+  align-self: flex-end;
+}
+
+/* ---------- Marquee ticker ---------- */
+
+.marquee {
+  overflow: hidden;
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  border-top: 2px solid var(--color-ink);
+  border-bottom: 2px solid var(--color-ink);
+  padding: 0.45rem 0;
+  transform: rotate(-0.6deg);
+  margin: var(--space-4) 0;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-drift 34s linear infinite;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  padding-right: 1.6rem;
+  font-family: var(--font-hand);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.marquee-group > span {
+  white-space: nowrap;
+}
+
+@keyframes marquee-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- Torn / deckle paper dividers ---------- */
+
+.deckle {
+  position: relative;
+  height: 26px;
+  background: var(--deckle-from);
+}
+
+.deckle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--deckle-to);
+  -webkit-mask-image: var(--deckle-mask);
+  mask-image: var(--deckle-mask);
+  -webkit-mask-size: 22px 26px;
+  mask-size: 22px 26px;
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+}
+
+.deckle-lilac { --deckle-from: var(--color-bg); --deckle-to: var(--paper-lilac-wash); }
+.deckle-cream { --deckle-from: var(--paper-lilac-wash); --deckle-to: var(--color-bg); }
+.deckle-pink { --deckle-from: var(--color-bg); --deckle-to: var(--color-bg-alt); }
+.deckle-cream-2 { --deckle-from: var(--color-bg-alt); --deckle-to: var(--color-bg); }
+
+.section-lilac {
+  background: var(--paper-lilac-wash);
+}
+
+/* Sections that carry the full scrapbook treatment sit tighter
+   against their torn edges. */
+.section-scrap {
+  padding-top: var(--space-5);
+}
+
+/* ---------- Services: per-card icon paper ---------- */
+
+.card-grid .service-card:nth-child(1) .icon { background: var(--paper-mint); }
+.card-grid .service-card:nth-child(2) .icon { background: var(--paper-pink); }
+.card-grid .service-card:nth-child(3) .icon { background: var(--paper-butter); }
+
+/* ---------- Work: photo-corner framing ---------- */
+
+.photo-frame {
+  background: var(--color-card);
+  border: 2px solid var(--color-ink);
+  border-radius: 6px;
+  padding: 12px;
+  box-shadow: 5px 6px 0 rgba(33, 27, 38, 0.12);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+/* corner tabs, as if slotted into a scrapbook page */
+.photo-frame::before,
+.photo-frame::after {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 3px solid var(--color-accent);
+  z-index: 2;
+}
+
+.photo-frame::before {
+  top: -5px;
+  left: -5px;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 6px 0 0 0;
+}
+
+.photo-frame::after {
+  right: -5px;
+  bottom: -5px;
+  border-left: none;
+  border-top: none;
+  border-radius: 0 0 6px 0;
+}
+
+.work-card-1 .photo-frame { transform: rotate(-1.8deg); }
+.work-card-2 .photo-frame { transform: rotate(1.5deg); }
+.work-card-3 .photo-frame { transform: rotate(-0.9deg); }
+
+.work-card .photo-frame:hover {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow: 7px 9px 0 rgba(33, 27, 38, 0.16);
+}
+
+.work-card .browser-frame {
+  box-shadow: none;
+  border-radius: var(--radius-md);
+}
+
+.work-card h3 {
+  margin-top: var(--space-4);
+}
+
+/* ---------- Reduced motion ----------
+   Kills every drift, wiggle and rotate-on-hover introduced above,
+   plus the pre-existing smooth scroll and button lift. */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .marquee-track {
+    animation: none;
+    transform: none;
+  }
+
+  .sticker:hover,
+  .sticker-hero-1:hover,
+  .sticker-hero-2:hover,
+  .sticker-card:hover,
+  .sticker-cta:hover,
+  .about-photo:hover,
+  .card-grid .service-card:hover,
+  .work-card .photo-frame:hover,
+  .btn-primary:hover,
+  .btn-ghost:hover {
+    transform: none;
+  }
+
+  /* static rotations are decorative, not motion - they stay,
+     but nothing animates into or out of them */
+  .card-grid .service-card:nth-child(1) { transform: rotate(-1deg); }
+  .card-grid .service-card:nth-child(2) { transform: rotate(0.6deg); }
+  .card-grid .service-card:nth-child(3) { transform: rotate(-0.5deg); }
+  .work-card-1 .photo-frame { transform: rotate(-1.8deg); }
+  .work-card-2 .photo-frame { transform: rotate(1.5deg); }
+  .work-card-3 .photo-frame { transform: rotate(-0.9deg); }
+  .about-photo { transform: rotate(-3deg); }
+}
+
+/* ---------- Responsive tuning for the motifs ---------- */
+
+@media (max-width: 1040px) {
+  .doodle-note {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .about-photo {
+    width: 150px;
+  }
 
   .about-avatar {
-    width: 88px;
-    height: 88px;
-    font-size: 2.2rem;
-    border-radius: var(--radius-md);
+    font-size: 3rem;
+  }
+
+  .hero-visual {
+    margin-top: var(--space-4);
+  }
+}
+
+@media (max-width: 700px) {
+  .about-photo {
+    width: 130px;
+  }
+
+  .about-avatar {
+    font-size: 2.6rem;
+  }
+
+  .marquee-group {
+    font-size: 1.3rem;
+  }
+
+  .sticker {
+    font-size: 1.02rem;
+    padding: 0.4rem 0.85rem;
+  }
+
+  .sticker-hero-1 { left: -4px; top: -14px; }
+  .sticker-hero-2 { right: -4px; bottom: -14px; }
+  .sticker-card { right: -4px; }
+  .sticker-cta { right: 4%; }
+
+  .tape {
+    width: 78px;
+    height: 23px;
   }
 }

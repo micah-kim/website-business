@@ -7,11 +7,11 @@
   <meta name="description" content="Foundry builds fast, good-looking websites for clothing resellers, artists, and independent sellers who are ready to sell beyond one platform." />
 
   <link rel="canonical" href="https://www.foundry.example/" />
-  <meta name="theme-color" content="#c2571c" />
+  <meta name="theme-color" content="#6d1b4e" />
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="mask-icon" href="assets/favicon.svg" color="#c2571c" />
+  <link rel="mask-icon" href="assets/favicon.svg" color="#6d1b4e" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
   <meta property="og:type" content="website" />
@@ -28,7 +28,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&amp;family=Fraunces:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 
   <script type="application/ld+json">
@@ -144,14 +144,23 @@
       <div class="wrap">
         <div class="hero-copy">
           <p class="eyebrow">Web design for independent sellers</p>
-          <h1>A website that sells your work as well as you make it.</h1>
+          <h1>
+            A website that sells your work as well as you
+            <span class="squiggle-word">make it.<svg class="doodle-squiggle" viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M2 9c24-7 48 4 72-1s48-8 72-2 48 8 72 3 48-6 80-2" /></svg></span>
+          </h1>
           <p class="hero-lede">
-            Foundry designs and builds fast, mobile-first websites for clothing
+            I design and build fast, mobile-first websites for clothing
             resellers, artists, and small makers who are outgrowing a single
             marketplace app.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#contact">Start your project</a>
+            <span class="cta-with-arrow">
+              <a class="btn btn-primary" href="#contact">Let's build yours</a>
+              <span class="doodle-note" aria-hidden="true">
+                <svg class="doodle-arrow" viewBox="0 0 76 54" aria-hidden="true" focusable="false"><path d="M70 6C52 2 22 6 12 24c-6 11 0 22 12 24" /><path d="M30 42l-6 8 10 2" /></svg>
+                <span class="doodle-note-text">start here!</span>
+              </span>
+            </span>
             <a class="btn btn-ghost" href="#services">See what's included</a>
           </div>
           <div class="hero-trust">
@@ -161,8 +170,12 @@
           </div>
         </div>
 
-        <div class="hero-visual" aria-hidden="true">
-          <div class="browser-frame">
+        <div class="hero-visual">
+          <span class="sticker sticker-mint sticker-hero-1" aria-hidden="true">new!</span>
+          <span class="sticker sticker-butter sticker-hero-2" aria-hidden="true">from $450</span>
+          <span class="tape tape-tl tape-pink" aria-hidden="true"></span>
+          <span class="tape tape-br tape-lilac" aria-hidden="true"></span>
+          <div class="browser-frame" aria-hidden="true">
             <div class="browser-bar">
               <span></span><span></span><span></span>
             </div>
@@ -181,6 +194,23 @@
       </div>
     </section>
 
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="marquee-group">
+          <span>your brand, not a template</span><span aria-hidden="true">✷</span>
+          <span>keep 100% of the sale</span><span aria-hidden="true">✷</span>
+          <span>built by one person</span><span aria-hidden="true">✷</span>
+          <span>live in 7 days</span><span aria-hidden="true">✷</span>
+        </span>
+        <span class="marquee-group">
+          <span>your brand, not a template</span><span aria-hidden="true">✷</span>
+          <span>keep 100% of the sale</span><span aria-hidden="true">✷</span>
+          <span>built by one person</span><span aria-hidden="true">✷</span>
+          <span>live in 7 days</span><span aria-hidden="true">✷</span>
+        </span>
+      </div>
+    </div>
+
     <section class="trustbar">
       <div class="wrap">
         <p>Built for people who sell, not just people who post</p>
@@ -193,16 +223,19 @@
       </div>
     </section>
 
-    <section id="services" class="section">
+    <div class="deckle deckle-lilac" aria-hidden="true"></div>
+
+    <section id="services" class="section section-scrap section-lilac">
       <div class="wrap">
         <div class="section-head">
-          <p class="eyebrow">Services</p>
+          <p class="eyebrow">What I make</p>
           <h2>Three ways to work together</h2>
           <p>Every project starts from the same place: a site that loads fast, looks intentional, and makes it obvious how to buy.</p>
         </div>
 
         <div class="card-grid">
-          <article class="service-card">
+          <article class="service-card taped">
+            <span class="tape tape-tl tape-mint" aria-hidden="true"></span>
             <div class="icon" aria-hidden="true">🛍️</div>
             <h3>Storefront site</h3>
             <p>A full shop front for resellers who want to sell outside Depop, Poshmark, or Instagram DMs.</p>
@@ -213,7 +246,9 @@
             </ul>
           </article>
 
-          <article class="service-card">
+          <article class="service-card taped">
+            <span class="tape tape-tl tape-pink" aria-hidden="true"></span>
+            <span class="sticker sticker-butter sticker-card" aria-hidden="true">most asked</span>
             <div class="icon" aria-hidden="true">🎨</div>
             <h3>Portfolio site</h3>
             <p>A gallery-first site for artists and makers who need a serious home for their work.</p>
@@ -224,7 +259,8 @@
             </ul>
           </article>
 
-          <article class="service-card">
+          <article class="service-card taped">
+            <span class="tape tape-tl tape-butter" aria-hidden="true"></span>
             <div class="icon" aria-hidden="true">🚀</div>
             <h3>Launch page</h3>
             <p>A single, sharp landing page for a drop, a pop-up, or a new brand that needs a home fast.</p>
@@ -238,17 +274,21 @@
       </div>
     </section>
 
-    <section id="work" class="section">
+    <div class="deckle deckle-cream" aria-hidden="true"></div>
+
+    <section id="work" class="section section-scrap">
       <div class="wrap">
         <div class="section-head">
-          <p class="eyebrow">Work</p>
+          <p class="eyebrow">The scrapbook</p>
           <h2>Three concepts, built to show the range</h2>
           <p>Foundry is new, so instead of client logos, here are three concept builds that show how a storefront, a portfolio, and a launch page each get designed differently.</p>
         </div>
 
         <div class="work-grid">
-          <article class="work-card">
-            <div class="browser-frame" aria-hidden="true">
+          <article class="work-card work-card-1">
+            <div class="photo-frame" aria-hidden="true">
+              <span class="tape tape-top tape-mint"></span>
+            <div class="browser-frame">
               <div class="browser-bar"><span></span><span></span><span></span></div>
               <div class="browser-body">
                 <div class="mock-shop">
@@ -261,12 +301,15 @@
                 </div>
               </div>
             </div>
+            </div>
             <h3>Storefront concept</h3>
             <p>A vintage-clothing reseller layout: catalog grid up top, checkout link one tap away.</p>
           </article>
 
-          <article class="work-card">
-            <div class="browser-frame" aria-hidden="true">
+          <article class="work-card work-card-2">
+            <div class="photo-frame" aria-hidden="true">
+              <span class="tape tape-top tape-pink"></span>
+            <div class="browser-frame">
               <div class="browser-bar"><span></span><span></span><span></span></div>
               <div class="browser-body">
                 <div class="mock-gallery">
@@ -277,12 +320,15 @@
                 </div>
               </div>
             </div>
+            </div>
             <h3>Portfolio concept</h3>
             <p>An artist's gallery layout: image-forward grid built to let the work speak first.</p>
           </article>
 
-          <article class="work-card">
-            <div class="browser-frame" aria-hidden="true">
+          <article class="work-card work-card-3">
+            <div class="photo-frame" aria-hidden="true">
+              <span class="tape tape-top tape-lilac"></span>
+            <div class="browser-frame">
               <div class="browser-bar"><span></span><span></span><span></span></div>
               <div class="browser-body">
                 <div class="mock-launch">
@@ -293,6 +339,7 @@
                 </div>
               </div>
             </div>
+            </div>
             <h3>Launch page concept</h3>
             <p>A single-page drop announcement: one headline, one CTA, built to share on social.</p>
           </article>
@@ -300,12 +347,19 @@
       </div>
     </section>
 
-    <section id="about" class="section section-alt">
+    <div class="deckle deckle-pink" aria-hidden="true"></div>
+
+    <section id="about" class="section section-alt section-scrap">
       <div class="wrap about-wrap">
-        <div class="about-avatar" aria-hidden="true">F</div>
+        <div class="about-photo" aria-hidden="true">
+          <span class="tape tape-top tape-butter"></span>
+          <div class="about-avatar">F</div>
+          <p class="about-caption">that's me, hi</p>
+        </div>
         <div class="about-copy">
-          <p class="eyebrow">About</p>
+          <p class="eyebrow">Who's behind it</p>
           <h2>Hi, I'm the person who'll build your site.</h2>
+          <span class="sticker sticker-mint sticker-about" aria-hidden="true">1 person studio</span>
           <p>
             Foundry is a one-person studio. No account managers, no
             hand-offs, no outsourced build team. When you send a message,
@@ -328,6 +382,8 @@
         </div>
       </div>
     </section>
+
+    <div class="deckle deckle-cream-2" aria-hidden="true"></div>
 
     <section id="process" class="section">
       <div class="wrap">
@@ -357,6 +413,8 @@
         </div>
       </div>
     </section>
+
+    <div class="deckle deckle-pink" aria-hidden="true"></div>
 
     <section id="compare" class="section section-alt">
       <div class="wrap">
@@ -413,6 +471,8 @@
       </div>
     </section>
 
+    <div class="deckle deckle-cream-2" aria-hidden="true"></div>
+
     <section id="pricing" class="section">
       <div class="wrap">
         <div class="section-head center">
@@ -434,7 +494,8 @@
             <a class="btn btn-ghost" href="#contact">Get started</a>
           </article>
 
-          <article class="price-card featured">
+          <article class="price-card featured taped">
+            <span class="tape tape-tl tape-mint" aria-hidden="true"></span>
             <h3>Storefront</h3>
             <p class="price">$1,200<span> full site</span></p>
             <p>The most common package for resellers and shops.</p>
@@ -493,6 +554,7 @@
     <section id="contact" class="section">
       <div class="wrap">
         <div class="cta-band">
+          <span class="sticker sticker-pink sticker-cta" aria-hidden="true">say hi!</span>
           <p class="eyebrow">Get started</p>
           <h2>Tell me about your shop</h2>
           <p>Send a few details and I'll reply within a day with next steps.</p>
@@ -516,7 +578,7 @@
               <label for="message">Tell me a bit about the project</label>
               <textarea id="message" name="message" rows="4" placeholder="What you're selling now, and what you wish your site could do."></textarea>
             </div>
-            <button class="btn btn-primary" type="submit">Send message</button>
+            <button class="btn btn-primary" type="submit">Send it over</button>
           </form>
 
           <p class="cta-fallback">
