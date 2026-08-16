@@ -5,12 +5,14 @@ if (navToggle && mobileNav) {
   const closeMobileNav = () => {
     mobileNav.hidden = true;
     navToggle.setAttribute("aria-expanded", "false");
+    navToggle.setAttribute("aria-label", "Open menu");
   };
 
   navToggle.addEventListener("click", () => {
     const isOpen = !mobileNav.hidden;
     mobileNav.hidden = isOpen;
     navToggle.setAttribute("aria-expanded", String(!isOpen));
+    navToggle.setAttribute("aria-label", isOpen ? "Open menu" : "Close menu");
   });
 
   mobileNav.querySelectorAll("a").forEach((link) => {
