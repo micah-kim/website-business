@@ -11,6 +11,7 @@
   --color-ink-soft: #5c5348;
   --color-line: #e3d9c9;
   --color-accent: #c2571c;
+  --color-accent-text: #ac4d19;
   --color-accent-ink: #fff7ef;
   --color-card: #ffffff;
 
@@ -127,7 +128,7 @@ p {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   margin-bottom: var(--space-2);
 }
 
