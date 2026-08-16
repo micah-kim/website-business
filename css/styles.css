@@ -860,6 +860,15 @@ main section[id],
   color: #e08a4f;
 }
 
+.cta-band .btn-primary {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+.cta-band .btn-primary:hover {
+  background: #e08a4f;
+}
+
 .cta-fallback {
   margin-top: var(--space-3);
   font-size: 0.85rem;
