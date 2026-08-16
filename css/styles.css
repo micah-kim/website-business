@@ -747,7 +747,8 @@ main section[id],
 }
 
 .price-card.featured p,
-.price-card.featured li {
+.price-card.featured li,
+.price-card.featured .price span {
   color: #d8d0c4;
 }
 
