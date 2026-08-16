@@ -32,3 +32,31 @@ if (navToggle && mobileNav) {
     }
   });
 }
+
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const name = contactForm.name.value.trim();
+    const email = contactForm.email.value.trim();
+    const business = contactForm.business.value.trim();
+    const message = contactForm.message.value.trim();
+
+    const subject = `Website inquiry from ${name || "your site"}`;
+    const bodyLines = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      business ? `Sells: ${business}` : null,
+      "",
+      message,
+    ].filter((line) => line !== null);
+
+    const mailto = `mailto:hello@foundry.example?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+
+    window.location.href = mailto;
+  });
+}
