@@ -305,6 +305,10 @@ main section[id],
   width: calc(100% - (var(--space-3) * 2));
 }
 
+.mobile-nav a.mobile-nav-cta {
+  color: var(--color-accent-ink);
+}
+
 /* ---------- Hero ---------- */
 
 .hero {
