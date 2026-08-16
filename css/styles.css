@@ -76,6 +76,10 @@ a {
   outline-offset: 3px;
 }
 
+main:focus-visible {
+  outline: none;
+}
+
 .skip-link {
   position: absolute;
   top: -100%;
