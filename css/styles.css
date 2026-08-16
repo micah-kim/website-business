@@ -752,7 +752,7 @@ main section[id],
 }
 
 .price-card.featured li::before {
-  background: #e08a4f;
+  color: #e08a4f;
 }
 
 .price {
