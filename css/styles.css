@@ -512,39 +512,42 @@ main section[id],
   grid-row: span 2;
 }
 
-.mock-launch {
+.mock-booking {
   display: grid;
-  justify-items: center;
-  text-align: center;
   gap: var(--space-1);
-  padding: var(--space-2) 0;
+  padding: var(--space-1) 0;
 }
 
-.mock-launch-badge {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: var(--paper-mint);
-  border: 2px solid var(--color-ink);
+.mock-booking-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.6rem;
 }
 
-.mock-launch-title {
-  width: 80%;
-  height: 12px;
+.mock-booking-row .label {
+  width: 55%;
+  height: 10px;
   border-radius: 4px;
   background: var(--color-line);
 }
 
-.mock-launch-title.short {
-  width: 50%;
+.mock-booking-row .pill {
+  width: 28%;
+  height: 16px;
+  border-radius: 100px;
+  background: var(--paper-butter);
 }
 
-.mock-launch-cta {
+.mock-booking-form {
   margin-top: var(--space-1);
-  width: 40%;
-  height: 26px;
-  border-radius: 100px;
-  background: var(--color-ink);
+  height: 30px;
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--color-line);
 }
 
 /* ---------- Logos / trust bar ---------- */
@@ -1221,17 +1224,6 @@ main section[id],
 
 .sticker-hero-2:hover { transform: rotate(0deg) scale(1.06); }
 
-.sticker-card {
-  position: absolute;
-  z-index: 4;
-  top: -16px;
-  right: -12px;
-  font-size: 1.05rem;
-  transform: rotate(9deg);
-}
-
-.sticker-card:hover { transform: rotate(2deg) scale(1.06); }
-
 .sticker-about {
   margin: 0 0 var(--space-2);
   transform: rotate(-3deg);
@@ -1468,7 +1460,6 @@ main section[id],
   .sticker:hover,
   .sticker-hero-1:hover,
   .sticker-hero-2:hover,
-  .sticker-card:hover,
   .sticker-cta:hover,
   .about-photo:hover,
   .card-grid .service-card:hover,
@@ -1531,7 +1522,6 @@ main section[id],
 
   .sticker-hero-1 { left: -4px; top: -14px; }
   .sticker-hero-2 { right: -4px; bottom: -14px; }
-  .sticker-card { right: -4px; }
   .sticker-cta { right: 4%; }
 
   .tape {
