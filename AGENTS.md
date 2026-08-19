@@ -17,7 +17,8 @@ dependencies. Every file ships to the web exactly as it is in git.
 |---|---|
 | `index.html` | All page content, all sections, and the JSON-LD blocks |
 | `css/styles.css` | The design system and all layout |
-| `js/main.js` | The mobile nav toggle and the contact form mailto link |
+| `js/main.js` | The mobile nav toggle, the Work previews, and the contact form mailto link |
+| `work/` | Three standalone concept sites. See "The concept sites" below |
 | `assets/` | The favicon, the apple touch icon, and the Open Graph image |
 | `favicon.ico` | Root icon for clients that request `/favicon.ico` |
 | `robots.txt`, `sitemap.xml` | Crawler files |
@@ -57,6 +58,40 @@ meets AA and must stay at AA.
 Give decorative markup `aria-hidden="true"`. The browser mockup illustrations
 are an example of this.
 
+## The concept sites
+
+`work/` holds three standalone concept sites. They are the proof in the
+`#work` section, because Foundry has no client list yet.
+
+| Path | Concept |
+|---|---|
+| `work/rerun/` | RERUN, a vintage resale storefront |
+| `work/studio/` | Marlowe Clay, a ceramicist portfolio |
+| `work/second-seam/` | Second Seam, an alterations booking site |
+
+Each concept is one self-contained HTML file with its own `<style>` block.
+
+These three files are the one exception to the CSS rules above. A concept
+must not use the Foundry tokens, and it must not share a look with the other
+two. Three sites that look alike prove no range. Give each one its own
+palette, its own type, and its own layout.
+
+Every text and background pair inside a concept must still meet WCAG AA.
+
+Do not use stock photos in a concept. Draw the product images with inline SVG
+and CSS. This keeps the repo free of an image rights problem.
+
+Keep the `concept-banner` element at the top of each concept. It marks the
+page as a concept, and it links back to `#contact`. The `#concept-banner`
+fragment hides it, which is how the preview iframes get a clean thumbnail.
+
+The `#work` cards frame each concept in a scaled iframe, so a thumbnail
+cannot drift from its concept. `js/main.js` holds the scale to the card
+width. The static mock behind the iframe is the fallback for when the frame
+cannot load.
+
+Add a new concept to `sitemap.xml` at the same time you add it to `work/`.
+
 ## Content rules
 
 The placeholder domain is `www.foundry.example` and the placeholder address is
@@ -80,6 +115,13 @@ There is no test suite. Check a change by hand:
    with a click outside it.
 4. Submit the contact form. Check that the mailto link holds every field.
 5. Check the browser console for errors.
+
+If you changed the `#work` section or a concept site, also do these steps:
+
+1. Check that each preview in `#work` matches its concept site.
+2. Open each concept site at a wide width and at a narrow width.
+3. Open `index.html` from the file system. Check that the static fallback
+   appears when a preview iframe cannot load.
 
 Be picky about the result. Fix a visible layout problem even if it is next to
 your change and not caused by it.
