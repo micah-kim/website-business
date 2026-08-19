@@ -425,6 +425,7 @@ main section[id],
 
 .browser-bar {
   display: flex;
+  align-items: center;
   gap: 6px;
   padding: 0.8rem 1rem;
   border-bottom: 1px solid var(--color-line);
@@ -489,10 +490,113 @@ main section[id],
   font-size: 1.15rem;
 }
 
+.work-card {
+  position: relative;
+}
+
 .work-card p {
   color: var(--color-ink-soft);
   font-size: 0.92rem;
   margin-bottom: 0;
+}
+
+.work-kicker {
+  margin: var(--space-4) 0 0.2rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+/* The whole card is the click target; the anchor keeps the label. */
+.work-cta {
+  display: inline-block;
+  margin-top: var(--space-2);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-accent-text);
+  text-decoration: none;
+}
+
+.work-cta::before {
+  content: "";
+  /* sits above the tape (z-index 3) so every part of the card clicks */
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: var(--radius-md);
+}
+
+.work-cta::after {
+  content: " \2192";
+  transition: margin-left 0.18s ease;
+}
+
+.work-card:hover .work-cta,
+.work-cta:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.work-card:hover .work-cta::after {
+  margin-left: 0.2rem;
+}
+
+.work-note {
+  margin: var(--space-4) 0 0;
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+/* ---------- Work: live concept previews ----------
+   Each card frames the real page from /work/ in a scaled iframe, so
+   the thumbnail can never drift from the concept it advertises.
+   The static mock underneath is the fallback when the frame cannot
+   load, which is what happens on a plain file:// open. */
+
+.preview {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--color-bg-alt), var(--color-card));
+}
+
+.preview-fallback {
+  position: absolute;
+  inset: 0;
+  padding: var(--space-3);
+}
+
+.preview-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1200px;
+  height: 900px;
+  border: 0;
+  transform-origin: 0 0;
+  /* 329px card / 1200px page; JS keeps this exact as the card resizes */
+  transform: scale(var(--preview-scale, 0.274));
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.preview[data-loaded="true"] .preview-frame {
+  opacity: 1;
+}
+
+.browser-url {
+  margin-left: 0.55rem;
+  padding: 0.1rem 0.6rem;
+  border-radius: 100px;
+  background: var(--color-bg-alt);
+  font-family: var(--font-body);
+  font-size: 0.66rem;
+  font-style: normal;
+  color: var(--color-ink-soft);
+  letter-spacing: 0.02em;
 }
 
 .mock-gallery {
@@ -1045,7 +1149,10 @@ main section[id],
 
 .footer-links {
   display: flex;
-  gap: var(--space-3);
+  /* eight links do not fit one line on a phone, and without the wrap
+     they push the whole page into a sideways scroll */
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
   list-style: none;
   padding: 0;
   margin: 0;
@@ -1421,7 +1528,9 @@ main section[id],
 .work-card-2 .photo-frame { transform: rotate(1.5deg); }
 .work-card-3 .photo-frame { transform: rotate(-0.9deg); }
 
-.work-card .photo-frame:hover {
+/* the card is one link, so the whole card drives the lift */
+.work-card:hover .photo-frame,
+.work-card:focus-within .photo-frame {
   transform: rotate(0deg) translateY(-4px);
   box-shadow: 7px 9px 0 rgba(33, 27, 38, 0.16);
 }
@@ -1432,7 +1541,7 @@ main section[id],
 }
 
 .work-card h3 {
-  margin-top: var(--space-4);
+  margin-top: 0;
 }
 
 /* ---------- Reduced motion ----------
@@ -1463,7 +1572,8 @@ main section[id],
   .sticker-cta:hover,
   .about-photo:hover,
   .card-grid .service-card:hover,
-  .work-card .photo-frame:hover,
+  .work-card:hover .photo-frame,
+  .work-card:focus-within .photo-frame,
   .btn-primary:hover,
   .btn-ghost:hover {
     transform: none;
@@ -1474,9 +1584,14 @@ main section[id],
   .card-grid .service-card:nth-child(1) { transform: rotate(-1deg); }
   .card-grid .service-card:nth-child(2) { transform: rotate(0.6deg); }
   .card-grid .service-card:nth-child(3) { transform: rotate(-0.5deg); }
-  .work-card-1 .photo-frame { transform: rotate(-1.8deg); }
-  .work-card-2 .photo-frame { transform: rotate(1.5deg); }
-  .work-card-3 .photo-frame { transform: rotate(-0.9deg); }
+  /* the hover selectors above out-specify a bare .work-card-n rule,
+     so the rotation has to be restated for the hover state too */
+  .work-card-1 .photo-frame,
+  .work-card-1:hover .photo-frame { transform: rotate(-1.8deg); }
+  .work-card-2 .photo-frame,
+  .work-card-2:hover .photo-frame { transform: rotate(1.5deg); }
+  .work-card-3 .photo-frame,
+  .work-card-3:hover .photo-frame { transform: rotate(-0.9deg); }
   .about-photo { transform: rotate(-3deg); }
 }
 

@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marlowe Clay - Ceramics</title>
+<meta name="description" content="A Foundry concept site: a gallery-first portfolio for a studio ceramicist." />
+<link rel="icon" href="data:," />
+<style>
+  /* ---------------------------------------------------------------
+     MARLOWE CLAY - concept portfolio for a studio ceramicist.
+     The deliberate opposite of the RERUN concept: quiet, serif,
+     wide margins, image-led. Restraint is the whole design.
+     --------------------------------------------------------------- */
+
+  :root {
+    --bone: #faf7f2;
+    --bone-2: #f1ebe1;
+    --ink: #232019;
+    --ink-soft: #6b6459;
+    --line: #ded5c7;
+    --clay: #9c4a2f;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bone);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .concept-banner {
+    background: var(--ink);
+    color: var(--bone);
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 9px 16px;
+  }
+  .concept-banner a { color: var(--bone); }
+  .concept-banner:target { display: none; }
+
+  /* --- Header --- */
+  header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 38px 0 0;
+  }
+
+  .name {
+    font-size: 19px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  nav a { text-decoration: none; }
+  nav a:hover { color: var(--clay); }
+
+  /* --- Statement --- */
+  .statement {
+    padding: 108px 0 96px;
+  }
+
+  .statement h1 {
+    margin: 0;
+    max-width: 22ch;
+    font-size: 58px;
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  .statement p {
+    margin: 30px 0 0;
+    max-width: 42ch;
+    font-size: 17px;
+    color: var(--ink-soft);
+  }
+
+  /* --- Work --- */
+  .piece {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-bottom: 96px;
+  }
+
+  .plate {
+    aspect-ratio: 16 / 10;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(150deg, var(--bone-2), #e6ddcf);
+  }
+
+  .piece:nth-of-type(2) .plate { background: linear-gradient(150deg, #efe6dd, #e0d3c4); }
+  .piece:nth-of-type(3) .plate { background: linear-gradient(150deg, #eee9e0, #ddd6c6); }
+
+  .plate svg { width: 34%; height: 76%; color: var(--clay); opacity: 0.72; }
+
+  .caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+
+  .caption h2 {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .caption .detail {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* wide pieces sit in a two-up row */
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 96px;
+  }
+
+  .row .piece { margin-bottom: 0; }
+  .row .plate { aspect-ratio: 4 / 5; }
+  .row .plate svg { width: 44%; }
+
+  /* --- Pull quote --- */
+  .quote {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 62px 0;
+    margin-bottom: 88px;
+    max-width: 30ch;
+    font-size: 28px;
+    line-height: 1.35;
+  }
+
+  .quote cite {
+    display: block;
+    margin-top: 22px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-style: normal;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* --- Footer --- */
+  footer {
+    padding-bottom: 88px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  footer h3 {
+    margin: 0 0 14px;
+    font-size: 30px;
+    font-weight: 400;
+  }
+
+  footer p { margin: 0 0 8px; color: var(--ink-soft); font-size: 16px; }
+
+  .mail {
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--clay);
+    text-decoration: none;
+    border-bottom: 1px solid var(--clay);
+    padding-bottom: 2px;
+  }
+
+  .studio-note {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    line-height: 2;
+  }
+
+  @media (max-width: 900px) {
+    .wrap { padding: 0 24px; }
+    .statement { padding: 62px 0 56px; }
+    .statement h1 { font-size: 40px; }
+    .row { grid-template-columns: 1fr; gap: 60px; }
+    footer { grid-template-columns: 1fr; }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="concept-banner" id="concept-banner">
+  Concept site by Foundry.
+  <a href="../../index.html#contact">Get one built for your work &rarr;</a>
+</div>
+
+<div class="wrap">
+
+  <header>
+    <a class="name" href="#">Marlowe Clay</a>
+    <nav>
+      <ul>
+        <li><a href="#">Work</a></li>
+        <li><a href="#">Process</a></li>
+        <li><a href="#">Exhibitions</a></li>
+        <li><a href="#">Inquire</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="statement">
+    <h1>Wheel-thrown vessels, fired in small batches.</h1>
+    <p>
+      A studio practice in Hudson, New York. Work is made in series of
+      twelve or fewer, glazed with locally sourced ash, and sold
+      directly or through galleries.
+    </p>
+  </section>
+
+  <!-- Vessel silhouettes stand in for photography. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="v-vase" viewBox="0 0 100 160">
+        <path d="M38 8h24v18c0 10 18 22 18 48 0 40-14 78-30 78S20 114 20 74c0-26 18-38 18-48z" fill="currentColor"/>
+      </symbol>
+      <symbol id="v-bowl" viewBox="0 0 100 160">
+        <path d="M8 62h84c0 48-16 78-42 78S8 110 8 62z" fill="currentColor"/>
+        <rect x="30" y="140" width="40" height="9" rx="4" fill="currentColor"/>
+      </symbol>
+      <symbol id="v-cup" viewBox="0 0 100 160">
+        <path d="M24 34h50l-6 100c0 10-8 16-19 16s-19-6-19-16z" fill="currentColor"/>
+        <path d="M74 56c18 0 22 14 22 24s-6 22-20 22" fill="none" stroke="currentColor" stroke-width="9"/>
+      </symbol>
+      <symbol id="v-jar" viewBox="0 0 100 160">
+        <path d="M30 20h40v14c14 8 20 26 20 48 0 42-18 66-40 66S10 124 10 82c0-22 6-40 20-48z" fill="currentColor"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <article class="piece">
+    <div class="plate"><svg aria-hidden="true"><use href="#v-vase"/></svg></div>
+    <div class="caption">
+      <h2>Ash Series, no. 4</h2>
+      <span class="detail">2026 &middot; Stoneware, wood ash glaze</span>
+    </div>
+  </article>
+
+  <div class="row">
+    <article class="piece">
+      <div class="plate"><svg aria-hidden="true"><use href="#v-bowl"/></svg></div>
+      <div class="caption">
+        <h2>Low Bowl</h2>
+        <span class="detail">2025 &middot; Ed. of 12</span>
+      </div>
+    </article>
+
+    <article class="piece">
+      <div class="plate"><svg aria-hidden="true"><use href="#v-cup"/></svg></div>
+      <div class="caption">
+        <h2>Everyday Cup</h2>
+        <span class="detail">2025 &middot; Ed. of 40</span>
+      </div>
+    </article>
+  </div>
+
+  <article class="piece">
+    <div class="plate"><svg aria-hidden="true"><use href="#v-jar"/></svg></div>
+    <div class="caption">
+      <h2>Storage Jar, Hudson</h2>
+      <span class="detail">2024 &middot; Private collection</span>
+    </div>
+  </article>
+
+  <blockquote class="quote">
+    The glaze does about half the work. My job is to stop before I
+    over-correct it.
+    <cite>Marlowe, studio notes</cite>
+  </blockquote>
+
+  <footer>
+    <div>
+      <h3>Commissions &amp; stockists</h3>
+      <p>Currently taking gallery and restaurant commissions for autumn 2026.</p>
+      <a class="mail" href="#">studio@marloweclay.example</a>
+    </div>
+    <div class="studio-note">
+      Studio visits by appointment<br />
+      Hudson, New York<br />
+      Represented by Field &amp; Kiln
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

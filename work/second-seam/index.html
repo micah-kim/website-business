@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Second Seam - Alterations &amp; made-to-measure</title>
+<meta name="description" content="A Foundry concept site: a commission and booking site for an alterations and tailoring studio." />
+<link rel="icon" href="data:," />
+<style>
+  /* ---------------------------------------------------------------
+     SECOND SEAM - concept booking site for an alterations studio.
+     Third distinct design language: utilitarian and service-led.
+     The design job here is clarity, not decoration. Every block
+     answers "what does it cost, how long does it take, how do I book".
+     --------------------------------------------------------------- */
+
+  :root {
+    --paper: #f7f4ef;
+    --sand: #e8ded0;
+    --ink: #1f1b17;
+    --ink-soft: #5c5449;
+    --line: #ddd3c4;
+    --green: #1f5e4a;
+    --green-dark: #174437;
+    --card: #ffffff;
+    --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --serif: "Iowan Old Style", Palatino, Georgia, serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0 34px;
+  }
+
+  .concept-banner {
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 12px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 9px 16px;
+  }
+  .concept-banner a { color: var(--sand); }
+  .concept-banner:target { display: none; }
+
+  /* --- Header --- */
+  header {
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    padding: 18px 0;
+  }
+
+  .logo {
+    font-family: var(--serif);
+    font-size: 23px;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--green); }
+
+  nav ul {
+    display: flex;
+    gap: 26px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  nav a { text-decoration: none; color: var(--ink-soft); }
+  nav a:hover { color: var(--green); }
+
+  .btn {
+    display: inline-block;
+    background: var(--green);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 4px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .btn:hover { background: var(--green-dark); }
+
+  .btn-quiet {
+    background: transparent;
+    color: var(--green);
+    border: 1.5px solid var(--green);
+    padding: 8.5px 18px;
+  }
+
+  /* --- Hero --- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.25fr 0.85fr;
+    gap: 48px;
+    align-items: center;
+    padding: 62px 0 54px;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: 46px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+    font-weight: 400;
+  }
+
+  .hero p {
+    margin: 0 0 26px;
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 46ch;
+  }
+
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .slot {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 22px 24px;
+  }
+
+  .slot h4 {
+    margin: 0 0 4px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .slot .big {
+    font-family: var(--serif);
+    font-size: 26px;
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  .slot ul { list-style: none; margin: 0; padding: 0; font-size: 13px; }
+
+  .slot li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 7px 0;
+    border-top: 1px solid var(--line);
+    color: var(--ink-soft);
+  }
+
+  .slot li b { color: var(--ink); font-weight: 600; }
+
+  /* --- Section shell --- */
+  section { padding: 54px 0; border-top: 1px solid var(--line); }
+
+  .head { margin-bottom: 26px; }
+
+  .head h2 {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 400;
+    margin: 0 0 6px;
+    letter-spacing: -0.015em;
+  }
+
+  .head p { margin: 0; color: var(--ink-soft); max-width: 56ch; }
+
+  /* --- Service list --- */
+  .services { border-top: 1px solid var(--line); }
+
+  .service {
+    display: grid;
+    grid-template-columns: 1.7fr 0.7fr 0.55fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .service h3 { margin: 0; font-size: 15px; font-weight: 600; }
+  .service p { margin: 2px 0 0; font-size: 13px; color: var(--ink-soft); }
+
+  .turn {
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .from { font-size: 15px; font-weight: 700; white-space: nowrap; line-height: 1.25; }
+  .from small {
+    display: block;
+    font-weight: 400;
+    color: var(--ink-soft);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .service .btn { font-size: 12px; padding: 8px 14px; }
+
+  /* --- Steps --- */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+
+  .step {
+    background: var(--sand);
+    border-radius: 8px;
+    padding: 22px 22px 24px;
+  }
+
+  .step span {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--green);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .step h3 { margin: 0 0 5px; font-size: 15px; }
+  .step p { margin: 0; font-size: 13.5px; color: var(--ink-soft); }
+
+  /* --- Request form --- */
+  .request {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 44px;
+    align-items: start;
+  }
+
+  form { display: grid; gap: 14px; }
+
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 5px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 10px 12px;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: 2px solid var(--green);
+    outline-offset: 1px;
+  }
+
+  textarea { resize: vertical; min-height: 88px; }
+
+  form .btn { border: 0; cursor: pointer; font-family: inherit; justify-self: start; }
+
+  .fine { font-size: 12px; color: var(--ink-soft); margin: 0; }
+
+  /* --- Footer --- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 32px 0 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  footer h4 {
+    margin: 0 0 8px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  @media (max-width: 900px) {
+    .wrap { padding: 0 20px; }
+    nav { display: none; }
+    .hero { grid-template-columns: 1fr; gap: 30px; padding: 38px 0; }
+    .hero h1 { font-size: 34px; }
+    .service { grid-template-columns: 1fr auto; gap: 8px 16px; }
+    .service .turn { grid-column: 1; }
+    .steps { grid-template-columns: 1fr; }
+    .request { grid-template-columns: 1fr; gap: 26px; }
+    footer { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="concept-banner" id="concept-banner">
+  Concept site by Foundry.
+  <a href="../../index.html#contact">Get one built for your studio &rarr;</a>
+</div>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#">Second <span>Seam</span></a>
+    <nav>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#">Made to measure</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </nav>
+    <a class="btn" href="#request">Book a fitting</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" style="border-top:0">
+    <div>
+      <h1>Alterations, repairs, and made-to-measure.</h1>
+      <p>
+        A two-person tailoring studio in Providence. Bring in what you
+        already own, or start something from a pattern. Most work is
+        back within two weeks.
+      </p>
+      <div class="hero-actions">
+        <a class="btn" href="#request">Request a fitting</a>
+        <a class="btn btn-quiet" href="#services">See prices</a>
+      </div>
+    </div>
+
+    <aside class="slot">
+      <h4>Next available</h4>
+      <span class="big">Thu, 27 Aug</span>
+      <ul>
+        <li><span>Tue &ndash; Fri</span><b>10am &ndash; 6pm</b></li>
+        <li><span>Saturday</span><b>11am &ndash; 4pm</b></li>
+        <li><span>Rush service</span><b>+40%</b></li>
+      </ul>
+    </aside>
+  </section>
+
+  <section id="services">
+    <div class="head">
+      <h2>Services &amp; turnaround</h2>
+      <p>Prices start where listed. The final quote is set at the fitting, once we see the garment and the fabric.</p>
+    </div>
+
+    <div class="services">
+      <article class="service">
+        <div>
+          <h3>Hem &amp; length</h3>
+          <p>Trousers, skirts, sleeves. Original hem kept where possible.</p>
+        </div>
+        <span class="turn">3 &ndash; 5 days</span>
+        <span class="from"><small>from</small>$28</span>
+        <a class="btn" href="#request">Book</a>
+      </article>
+
+      <article class="service">
+        <div>
+          <h3>Take in &amp; reshape</h3>
+          <p>Waist, side seams, and back darts on jackets and shirting.</p>
+        </div>
+        <span class="turn">1 &ndash; 2 weeks</span>
+        <span class="from"><small>from</small>$65</span>
+        <a class="btn" href="#request">Book</a>
+      </article>
+
+      <article class="service">
+        <div>
+          <h3>Repair &amp; reweave</h3>
+          <p>Moth holes, torn seams, worn knees and elbows, zip replacement.</p>
+        </div>
+        <span class="turn">1 &ndash; 2 weeks</span>
+        <span class="from"><small>from</small>$40</span>
+        <a class="btn" href="#request">Book</a>
+      </article>
+
+      <article class="service">
+        <div>
+          <h3>Bridal &amp; occasion</h3>
+          <p>Multi-stage fittings, bustles, and pressing before the date.</p>
+        </div>
+        <span class="turn">4 &ndash; 8 weeks</span>
+        <span class="from"><small>from</small>$280</span>
+        <a class="btn" href="#request">Book</a>
+      </article>
+
+      <article class="service">
+        <div>
+          <h3>Made to measure</h3>
+          <p>Shirting, trousers, and unstructured jackets from your own cloth.</p>
+        </div>
+        <span class="turn">6 &ndash; 10 weeks</span>
+        <span class="from"><small>from</small>$450</span>
+        <a class="btn" href="#request">Book</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="head">
+      <h2>How it works</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span>1</span>
+        <h3>Send the request</h3>
+        <p>Tell us the garment and what you want changed. A photo helps but is not needed.</p>
+      </div>
+      <div class="step">
+        <span>2</span>
+        <h3>Come in for a fitting</h3>
+        <p>We pin the garment, confirm the work, and give you a firm price and a date.</p>
+      </div>
+      <div class="step">
+        <span>3</span>
+        <h3>Collect or ship</h3>
+        <p>Pay on collection. We post nationwide for a flat $12 if you cannot come back.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="request">
+    <div class="request">
+      <div class="head" style="margin:0">
+        <h2>Request a fitting</h2>
+        <p>We reply within one working day with two or three times that fit your week. No deposit until the fitting.</p>
+      </div>
+
+      <form onsubmit="return false">
+        <div class="pair">
+          <div>
+            <label for="ss-name">Name</label>
+            <input id="ss-name" type="text" placeholder="Alex Moreau" />
+          </div>
+          <div>
+            <label for="ss-email">Email</label>
+            <input id="ss-email" type="email" placeholder="alex@email.com" />
+          </div>
+        </div>
+
+        <div class="pair">
+          <div>
+            <label for="ss-service">Service</label>
+            <select id="ss-service">
+              <option>Hem &amp; length</option>
+              <option>Take in &amp; reshape</option>
+              <option>Repair &amp; reweave</option>
+              <option>Bridal &amp; occasion</option>
+              <option>Made to measure</option>
+            </select>
+          </div>
+          <div>
+            <label for="ss-when">Preferred week</label>
+            <input id="ss-when" type="text" placeholder="Week of 25 Aug" />
+          </div>
+        </div>
+
+        <div>
+          <label for="ss-notes">What are we working on?</label>
+          <textarea id="ss-notes" placeholder="A wool suit jacket, too long in the sleeve, and the lining has torn at the left shoulder."></textarea>
+        </div>
+
+        <button class="btn" type="submit">Send request</button>
+        <p class="fine">Or call the studio on (401) 555-0148 during opening hours.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div>
+    <h4>Studio</h4>
+    114 Wickenden Street<br />
+    Providence, RI 02903
+  </div>
+  <div>
+    <h4>Hours</h4>
+    Tue &ndash; Fri, 10am &ndash; 6pm<br />
+    Saturday, 11am &ndash; 4pm<br />
+    Closed Sunday &amp; Monday
+  </div>
+  <div>
+    <h4>Contact</h4>
+    hello@secondseam.example<br />
+    (401) 555-0148
+  </div>
+</footer>
+
+</body>
+</html>
