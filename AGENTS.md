@@ -1,11 +1,11 @@
-# Agent guide - Foundry marketing site
+# Agent guide - You Need a Website marketing site
 
 Note: `CLAUDE.md` is a symlink to this file. Edit `AGENTS.md` only. Do not
 replace the symlink with a copy, because the two files must not drift.
 
 ## What this repo is
 
-Foundry is a one-page marketing site for a web design side business. The
+You Need a Website is a one-page marketing site for a web design side business. The
 customers are clothing resellers, artists, and independent sellers.
 
 The site is static. There is no build step, no package manager, and no
@@ -17,7 +17,7 @@ dependencies. Every file ships to the web exactly as it is in git.
 |---|---|
 | `index.html` | All page content, all sections, and the JSON-LD blocks |
 | `css/styles.css` | The design system and all layout |
-| `js/main.js` | The mobile nav toggle, the Work previews, and the contact form mailto link |
+| `js/main.js` | The mobile nav toggle, the Work previews, and the contact form submit |
 | `work/` | Three standalone concept sites. See "The concept sites" below |
 | `assets/` | The favicon, the apple touch icon, and the Open Graph image |
 | `favicon.ico` | Root icon for clients that request `/favicon.ico` |
@@ -61,7 +61,7 @@ are an example of this.
 ## The concept sites
 
 `work/` holds three standalone concept sites. They are the proof in the
-`#work` section, because Foundry has no client list yet.
+`#work` section, because You Need a Website has no client list yet.
 
 | Path | Concept |
 |---|---|
@@ -72,7 +72,7 @@ are an example of this.
 Each concept is one self-contained HTML file with its own `<style>` block.
 
 These three files are the one exception to the CSS rules above. A concept
-must not use the Foundry tokens, and it must not share a look with the other
+must not use the You Need a Website tokens, and it must not share a look with the other
 two. Three sites that look alike prove no range. Give each one its own
 palette, its own type, and its own layout.
 
@@ -94,9 +94,33 @@ Add a new concept to `sitemap.xml` at the same time you add it to `work/`.
 
 ## Content rules
 
-The placeholder domain is `www.foundry.example` and the placeholder address is
-`hello@foundry.example`. Change them in every place at the same time if a real
-domain arrives. They appear in `index.html`, `sitemap.xml`, and `robots.txt`.
+The placeholder domain is `www.youneedawebsite.example`. Change it in every
+place at the same time if a real domain arrives. It appears in `index.html`,
+`sitemap.xml`, and `robots.txt`.
+
+The contact address is `micah.kim.hj@gmail.com`. It appears in `index.html`
+twice, in the visible fallback link and in the `ProfessionalService` JSON-LD
+block, and once in `js/main.js` as `CONTACT_EMAIL`.
+
+## The contact form
+
+The form in `#contact` posts to Web3Forms, which forwards the message to the
+contact address. The account key lives in one hidden input in `index.html`:
+
+```
+<input type="hidden" name="access_key" value="" />
+```
+
+The key is public by design. It only names the destination inbox, and it
+cannot read mail. Get a key at web3forms.com and paste it into that value.
+
+While the value is blank, `js/main.js` skips the request and opens a
+prefilled `mailto:` link instead. The same fallback runs if the request
+fails or times out, so the button is never dead. `#contactNoteLead` states
+which of the two paths is live, so do not hard code that sentence.
+
+The form carries a honeypot checkbox named `botcheck`. Keep it, and keep it
+off screen with the `.honeypot` class rather than `display: none`.
 
 Keep the two JSON-LD blocks in `index.html` in sync with the page. The
 `FAQPage` block must match the questions and the answers in `#faq`. The
@@ -113,7 +137,9 @@ There is no test suite. Check a change by hand:
 2. Look at the changed section at a wide width and at a narrow width.
 3. Open the mobile nav. Then close it with a link, with the Escape key, and
    with a click outside it.
-4. Submit the contact form. Check that the mailto link holds every field.
+4. Submit the contact form. With a blank key, check that the mailto link
+   holds every field. With a real key, check for the green success chip and
+   for the mail in the inbox.
 5. Check the browser console for errors.
 
 If you changed the `#work` section or a concept site, also do these steps:

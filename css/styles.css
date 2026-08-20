@@ -1,5 +1,5 @@
 /* =========================================================
-   Foundry - design system
+   You Need a Website - design system
    Pastel Y2K scrapbook: candy paper, washi tape, stickers and
    doodles, held together by one deep berry ink.
 
@@ -212,6 +212,7 @@ p {
   text-decoration: none;
   border: 1px solid transparent;
   cursor: pointer;
+  white-space: nowrap;
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
@@ -272,6 +273,7 @@ main section[id],
   font-size: 1.2rem;
   text-decoration: none;
   color: var(--color-ink);
+  white-space: nowrap;
 }
 
 .brand-mark {
@@ -289,7 +291,7 @@ main section[id],
 .nav-links {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1132,6 +1134,63 @@ main section[id],
   margin-top: var(--space-1);
 }
 
+.contact-form button[disabled] {
+  opacity: 0.75;
+  cursor: progress;
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+/* Status sits on the dark CTA band, so it is a pastel chip with ink text,
+   never pastel text. Both pairings are far above WCAG AA.
+   The .cta-band p rule caps paragraphs at 480px and centres them, so this
+   has to out-specify it to line up with the fields above. */
+.cta-band .form-status {
+  margin: 0;
+  max-width: none;
+}
+
+.form-status {
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: left;
+  display: none;
+}
+
+.form-status.is-pending,
+.form-status.is-success,
+.form-status.is-error {
+  display: block;
+}
+
+.cta-band .form-status.is-pending {
+  background: var(--paper-lilac);
+  color: var(--color-ink);
+}
+
+.cta-band .form-status.is-success {
+  background: var(--paper-mint);
+  color: var(--color-ink);
+}
+
+.cta-band .form-status.is-error {
+  background: var(--paper-butter);
+  color: var(--color-ink);
+}
+
+.cta-band .form-status a {
+  color: var(--color-ink);
+  text-decoration: underline;
+}
+
 /* ---------- Footer ---------- */
 
 .site-footer {
@@ -1175,7 +1234,9 @@ main section[id],
 
 /* ---------- Responsive ---------- */
 
-@media (max-width: 1040px) {
+/* The brand is a full sentence, so the desktop row needs the whole
+   container. Below that, hand over to the mobile nav. */
+@media (max-width: 1120px) {
   .nav-links,
   .nav-cta .btn-ghost,
   .nav-cta .btn-primary {

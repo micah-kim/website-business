@@ -84,30 +84,112 @@ document.querySelectorAll(".preview").forEach((preview) => {
   }
 });
 
+/* ---------- Contact form ----------
+   Posts to Web3Forms, which forwards the message to the inbox. If the
+   access key is blank, or the request fails, we drop back to a prefilled
+   mailto link so a visitor is never left with a dead button. */
+
+const CONTACT_EMAIL = "micah.kim.hj@gmail.com";
+const CONTACT_ENDPOINT = "https://api.web3forms.com/submit";
+const CONTACT_TIMEOUT_MS = 15000;
+
 const contactForm = document.getElementById("contactForm");
 
 if (contactForm) {
-  contactForm.addEventListener("submit", (event) => {
-    event.preventDefault();
+  const statusEl = document.getElementById("contactStatus");
+  const submitEl = document.getElementById("contactSubmit");
+  const noteLeadEl = document.getElementById("contactNoteLead");
+  const submitLabel = submitEl ? submitEl.textContent : "";
 
-    const name = contactForm.name.value.trim();
-    const email = contactForm.email.value.trim();
-    const business = contactForm.business.value.trim();
-    const message = contactForm.message.value.trim();
+  /* form.name is the form's own attribute, not the field, so always go
+     through elements */
+  const fieldValue = (name) => {
+    const el = contactForm.elements.namedItem(name);
+    return el && typeof el.value === "string" ? el.value.trim() : "";
+  };
 
-    const subject = `Website inquiry from ${name || "your site"}`;
+  const accessKey = fieldValue("access_key");
+
+  if (!accessKey && noteLeadEl) {
+    noteLeadEl.textContent =
+      "This opens your email app with the details filled in.";
+  }
+
+  const setStatus = (state, text) => {
+    if (!statusEl) return;
+    statusEl.className = state ? `form-status is-${state}` : "form-status";
+    statusEl.textContent = text || "";
+  };
+
+  const setBusy = (busy) => {
+    if (!submitEl) return;
+    submitEl.disabled = busy;
+    submitEl.textContent = busy ? "Sending..." : submitLabel;
+  };
+
+  const mailtoLink = () => {
+    const name = fieldValue("name");
     const bodyLines = [
       `Name: ${name}`,
-      `Email: ${email}`,
-      business ? `Sells: ${business}` : null,
+      `Email: ${fieldValue("email")}`,
+      fieldValue("business") ? `Sells: ${fieldValue("business")}` : null,
       "",
-      message,
+      fieldValue("message"),
     ].filter((line) => line !== null);
 
-    const mailto = `mailto:hello@foundry.example?subject=${encodeURIComponent(
+    const subject = `Website inquiry from ${name || "your site"}`;
+
+    return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+  };
 
-    window.location.href = mailto;
+  contactForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!accessKey) {
+      window.location.href = mailtoLink();
+      return;
+    }
+
+    const payload = new FormData(contactForm);
+    payload.set("subject", `Website inquiry from ${fieldValue("name") || "your site"}`);
+
+    setBusy(true);
+    setStatus("pending", "Sending...");
+
+    const controller = new AbortController();
+    const timer = window.setTimeout(
+      () => controller.abort(),
+      CONTACT_TIMEOUT_MS
+    );
+
+    try {
+      const response = await fetch(CONTACT_ENDPOINT, {
+        method: "POST",
+        body: payload,
+        signal: controller.signal,
+      });
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Send failed");
+      }
+
+      contactForm.reset();
+      setStatus(
+        "success",
+        "Thanks, that's in. I'll reply to your email within a day."
+      );
+    } catch (error) {
+      setStatus(
+        "error",
+        `That didn't send. Opening your email app instead - or write to ${CONTACT_EMAIL} directly.`
+      );
+      window.location.href = mailtoLink();
+    } finally {
+      window.clearTimeout(timer);
+      setBusy(false);
+    }
   });
 }
